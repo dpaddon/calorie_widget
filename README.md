@@ -12,5 +12,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Invaluable insight gleaned from this [SwiftRocks tutorial](https://swiftrocks.com/ios-14-widget-tutorial-mini-apps)
-* Inspiration
-* etc
