@@ -13,6 +13,11 @@
 		65AA36C324A5DE0400B69C88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AA36C224A5DE0400B69C88 /* Preview Assets.xcassets */; };
 		65AA36CE24A5DE0500B69C88 /* calorie_widgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA36CD24A5DE0500B69C88 /* calorie_widgetTests.swift */; };
 		65AA36D924A5DE0500B69C88 /* calorie_widgetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA36D824A5DE0500B69C88 /* calorie_widgetUITests.swift */; };
+		65AA36ED24A5DE4800B69C88 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AA36EC24A5DE4800B69C88 /* WidgetKit.framework */; };
+		65AA36EF24A5DE4800B69C88 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AA36EE24A5DE4800B69C88 /* SwiftUI.framework */; };
+		65AA36F224A5DE4800B69C88 /* calorie_widget_target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA36F124A5DE4800B69C88 /* calorie_widget_target.swift */; };
+		65AA36F424A5DE4B00B69C88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AA36F324A5DE4B00B69C88 /* Assets.xcassets */; };
+		65AA36F824A5DE4B00B69C88 /* calorie_widget_targetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65AA36EA24A5DE4800B69C88 /* calorie_widget_targetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +35,28 @@
 			remoteGlobalIDString = 65AA36B724A5DE0300B69C88;
 			remoteInfo = calorie_widget;
 		};
+		65AA36F624A5DE4B00B69C88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65AA36B024A5DE0300B69C88 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65AA36E924A5DE4800B69C88;
+			remoteInfo = calorie_widget_targetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		65AA36FC24A5DE4B00B69C88 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				65AA36F824A5DE4B00B69C88 /* calorie_widget_targetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		65AA36B824A5DE0300B69C88 /* calorie_widget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calorie_widget.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +71,12 @@
 		65AA36D424A5DE0500B69C88 /* calorie_widgetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calorie_widgetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65AA36D824A5DE0500B69C88 /* calorie_widgetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calorie_widgetUITests.swift; sourceTree = "<group>"; };
 		65AA36DA24A5DE0500B69C88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65AA36EA24A5DE4800B69C88 /* calorie_widget_targetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = calorie_widget_targetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		65AA36EC24A5DE4800B69C88 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		65AA36EE24A5DE4800B69C88 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		65AA36F124A5DE4800B69C88 /* calorie_widget_target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calorie_widget_target.swift; sourceTree = "<group>"; };
+		65AA36F324A5DE4B00B69C88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		65AA36F524A5DE4B00B69C88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +101,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		65AA36E724A5DE4800B69C88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65AA36EF24A5DE4800B69C88 /* SwiftUI.framework in Frameworks */,
+				65AA36ED24A5DE4800B69C88 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +119,8 @@
 				65AA36BA24A5DE0300B69C88 /* calorie_widget */,
 				65AA36CC24A5DE0500B69C88 /* calorie_widgetTests */,
 				65AA36D724A5DE0500B69C88 /* calorie_widgetUITests */,
+				65AA36F024A5DE4800B69C88 /* calorie_widget_target */,
+				65AA36EB24A5DE4800B69C88 /* Frameworks */,
 				65AA36B924A5DE0300B69C88 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +131,7 @@
 				65AA36B824A5DE0300B69C88 /* calorie_widget.app */,
 				65AA36C924A5DE0500B69C88 /* calorie_widgetTests.xctest */,
 				65AA36D424A5DE0500B69C88 /* calorie_widgetUITests.xctest */,
+				65AA36EA24A5DE4800B69C88 /* calorie_widget_targetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +174,25 @@
 			path = calorie_widgetUITests;
 			sourceTree = "<group>";
 		};
+		65AA36EB24A5DE4800B69C88 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65AA36EC24A5DE4800B69C88 /* WidgetKit.framework */,
+				65AA36EE24A5DE4800B69C88 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65AA36F024A5DE4800B69C88 /* calorie_widget_target */ = {
+			isa = PBXGroup;
+			children = (
+				65AA36F124A5DE4800B69C88 /* calorie_widget_target.swift */,
+				65AA36F324A5DE4B00B69C88 /* Assets.xcassets */,
+				65AA36F524A5DE4B00B69C88 /* Info.plist */,
+			);
+			path = calorie_widget_target;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -140,10 +203,12 @@
 				65AA36B424A5DE0300B69C88 /* Sources */,
 				65AA36B524A5DE0300B69C88 /* Frameworks */,
 				65AA36B624A5DE0300B69C88 /* Resources */,
+				65AA36FC24A5DE4B00B69C88 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				65AA36F724A5DE4B00B69C88 /* PBXTargetDependency */,
 			);
 			name = calorie_widget;
 			productName = calorie_widget;
@@ -186,6 +251,23 @@
 			productReference = 65AA36D424A5DE0500B69C88 /* calorie_widgetUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		65AA36E924A5DE4800B69C88 /* calorie_widget_targetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65AA36F924A5DE4B00B69C88 /* Build configuration list for PBXNativeTarget "calorie_widget_targetExtension" */;
+			buildPhases = (
+				65AA36E624A5DE4800B69C88 /* Sources */,
+				65AA36E724A5DE4800B69C88 /* Frameworks */,
+				65AA36E824A5DE4800B69C88 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = calorie_widget_targetExtension;
+			productName = calorie_widget_targetExtension;
+			productReference = 65AA36EA24A5DE4800B69C88 /* calorie_widget_targetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -206,6 +288,9 @@
 						CreatedOnToolsVersion = 12.0;
 						TestTargetID = 65AA36B724A5DE0300B69C88;
 					};
+					65AA36E924A5DE4800B69C88 = {
+						CreatedOnToolsVersion = 12.0;
+					};
 				};
 			};
 			buildConfigurationList = 65AA36B324A5DE0300B69C88 /* Build configuration list for PBXProject "calorie_widget" */;
@@ -224,6 +309,7 @@
 				65AA36B724A5DE0300B69C88 /* calorie_widget */,
 				65AA36C824A5DE0500B69C88 /* calorie_widgetTests */,
 				65AA36D324A5DE0500B69C88 /* calorie_widgetUITests */,
+				65AA36E924A5DE4800B69C88 /* calorie_widget_targetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -249,6 +335,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65AA36E824A5DE4800B69C88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65AA36F424A5DE4B00B69C88 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +374,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		65AA36E624A5DE4800B69C88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65AA36F224A5DE4800B69C88 /* calorie_widget_target.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -292,6 +394,11 @@
 			isa = PBXTargetDependency;
 			target = 65AA36B724A5DE0300B69C88 /* calorie_widget */;
 			targetProxy = 65AA36D524A5DE0500B69C88 /* PBXContainerItemProxy */;
+		};
+		65AA36F724A5DE4B00B69C88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65AA36E924A5DE4800B69C88 /* calorie_widget_targetExtension */;
+			targetProxy = 65AA36F624A5DE4B00B69C88 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -415,6 +522,7 @@
 		65AA36DE24A5DE0500B69C88 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -436,6 +544,7 @@
 		65AA36DF24A5DE0500B69C88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -534,6 +643,46 @@
 			};
 			name = Release;
 		};
+		65AA36FA24A5DE4B00B69C88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = calorie_widget_target/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Daniel-Paddon.calorie-widget.calorie-widget-target";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		65AA36FB24A5DE4B00B69C88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = calorie_widget_target/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Daniel-Paddon.calorie-widget.calorie-widget-target";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -569,6 +718,15 @@
 			buildConfigurations = (
 				65AA36E424A5DE0500B69C88 /* Debug */,
 				65AA36E524A5DE0500B69C88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65AA36F924A5DE4B00B69C88 /* Build configuration list for PBXNativeTarget "calorie_widget_targetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65AA36FA24A5DE4B00B69C88 /* Debug */,
+				65AA36FB24A5DE4B00B69C88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
