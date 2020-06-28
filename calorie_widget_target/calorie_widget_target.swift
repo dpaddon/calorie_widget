@@ -7,13 +7,81 @@
 
 import WidgetKit
 import SwiftUI
+import HealthKit
+
+
+// The quantity types to read from the health store.
+let typesToRead: Set = [
+    HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
+]
+
+class MyHealthStore: HKHealthStore {
+    func TodayTotalActiveCalories(completion: @escaping (_ activeCaloriesRetrieved: Double) -> Void) {
+
+        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
+            fatalError("*** Unable to create an activeEnergyBurned type ***")
+        }
+
+        let calendar = NSCalendar.current
+        let interval = NSDateComponents()
+        interval.day = 1
+
+        var anchorComponents = calendar.dateComponents([.day , .month , .year], from: NSDate() as Date)
+        anchorComponents.hour = 0
+        
+        guard let anchorDate = calendar.date(from: anchorComponents) else {
+            fatalError("*** unable to create a valid date from the given components ***")
+        }
+
+        let ActiveCaloriesQuery = HKStatisticsCollectionQuery(quantityType: quantityType,
+                                                quantitySamplePredicate: nil,
+                                                options: .cumulativeSum,
+                                                anchorDate: anchorDate,
+                                                intervalComponents: interval as DateComponents)
+        
+        ActiveCaloriesQuery.initialResultsHandler = {query, results, error in
+            let endDate = NSDate()
+
+            var totalActiveCalories = 0.0
+            let startDate = calendar.date(byAdding: .day, value: 0, to: endDate as Date)
+            if let myResults = results{  myResults.enumerateStatistics(from: startDate!, to: endDate as Date) { statistics, stop in
+                if let quantity = statistics.sumQuantity(){
+                    //let date = statistics.startDate
+                    totalActiveCalories = quantity.doubleValue(for: HKUnit.count())
+                   // print("\(date): ActiveCalories = \(ActiveCalories)")
+                }
+
+                //completion(activeCaloriesRetrieved: totalActiveCalories)
+
+                }
+            } else {
+                // mostly not executed
+                completion(totalActiveCalories)
+            }
+        }
+        execute(ActiveCaloriesQuery)
+    }
+}
+
 
 
 // Utility function - this needs to get the calories using healthKit
 // For now we will just hardcode them
 struct BurnedCalorieLoader {
+    static let healthKitStore = MyHealthStore()
+    
+    
     static func fetch() -> BurnedCalorieCount {
-        let activeCals = 4
+        // Request authorization for those quantity types.
+        healthKitStore.requestAuthorization(toShare: nil, read: typesToRead) { (success, error) in
+            // Handle error.
+        }
+        
+        var activeCals=0
+        healthKitStore.TodayTotalActiveCalories { (activeCaloriesRetrieved) in
+            activeCals = Int(activeCaloriesRetrieved)
+        }
+
         let restingCals = 5
         let totalCals = activeCals + restingCals
         
@@ -39,7 +107,7 @@ struct Provider: TimelineProvider {
     public func timeline(with context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
         let currentDate = Date()
         // Refresh every 5 mins
-        let refreshDate = Calendar.current.date(byAdding: .minute, value: 5, to: currentDate)!
+        let refreshDate = Calendar.current.date(byAdding: .second, value: 10, to: currentDate)!
 
         // Get burned calories
         let burned_calories = BurnedCalorieLoader.fetch()
