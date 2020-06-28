@@ -78,14 +78,14 @@ struct calorie_widget_targetEntryView : View {
         VStack(alignment: .leading, spacing: 4) {
             Text("\(String(entry.burnedCalories.total)) kcal")
                 .font(.system(.callout))
-                .foregroundColor(.black)
+                .foregroundColor(.white)
                 .bold()
             Text("burned so far today \(Self.format(date:entry.date))")
                 .font(.system(.caption))
-                .foregroundColor(.black)
+                .foregroundColor(.white)
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
             .padding()
-            .background(LinearGradient(gradient: Gradient(colors: [.orange, .yellow]), startPoint: .top, endPoint: .bottom))
+            .background(LinearGradient(gradient: Gradient(colors: [.yellow, .red]), startPoint: .topLeading, endPoint: .bottomTrailing))
     }
 
     static func format(date: Date) -> String {
