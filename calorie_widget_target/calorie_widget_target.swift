@@ -113,3 +113,18 @@ struct calorie_widget_target: Widget {
     }
 }
 
+
+struct calorie_widget_target_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            calorie_widget_targetEntryView(entry: SimpleEntry(date: Date(), burnedCalories: BurnedCalorieCount(active: 1, resting: 2, total: 3)))
+                .previewContext(WidgetPreviewContext(family:
+                    .systemSmall))
+            
+            PlaceholderView()
+                .previewContext(WidgetPreviewContext(family:
+                    .systemSmall))
+        }
+    }
+}
+
