@@ -14,4 +14,5 @@ struct calorie_widgetApp: App {
             ContentView()
         }
     }
+    
 }
