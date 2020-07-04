@@ -63,41 +63,46 @@ class MyHealthStore: HKHealthStore {
 // Utility function - this needs to get the calories using healthKit
 // For now we will just hardcode them
 struct BurnedCalorieLoader {
-    let healthKitStore = MyHealthStore()
     
-    // Request authorization to access HealthKit.
-    func requestAuthorization() {
+    func fetch() -> BurnedCalorieCount {
+        
+        var cals_output = BurnedCalorieCount(active: 1, resting: 2, total: 42)
+
         // Requesting authorization.
         /// - Tag: RequestAuthorization
         // The quantity types to read from the health store.
-        let typesToWrite: Set = [
+        let typesToWrite: Set = ([
             HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
-        ]
-        let typesToRead: Set = [
+        ])
+        let typesToRead: Set = ([
             HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
-        ]
+        ])
         
-        // Request authorization for those quantity types.
-        healthKitStore.requestAuthorization(toShare: typesToWrite, read: typesToRead) { (success, error) in
-            // Handle error.
-            print("Failed while requesting authorisation")
-        }
-        return
-    }
-    
-    func fetch() -> BurnedCalorieCount {
-        var activeCals=0
-        
-        self.healthKitStore.TodayTotalActiveCalories { (activeCaloriesRetrieved) in
-            activeCals = Int(activeCaloriesRetrieved)
-        }
+        let healthKitStore = MyHealthStore()
+        healthKitStore.requestAuthorization(toShare: typesToWrite, read: typesToRead) { (success, error) -> Void in
+            if(success){
+                    // Read or write the HealthKit data
+                var activeCals=0
+                
+                healthKitStore.TodayTotalActiveCalories { (activeCaloriesRetrieved) in
+                    activeCals = Int(activeCaloriesRetrieved)
+                }
 
-        let restingCals = 5
-        let totalCals = activeCals + restingCals
-        
-        let cals_output = BurnedCalorieCount(active: activeCals, resting: restingCals, total: totalCals)
+                let restingCals = 5
+                let totalCals = activeCals + restingCals
+                
+                cals_output = BurnedCalorieCount(active: activeCals, resting: restingCals, total: totalCals)
+                
+            }
+            else{
+                    // Authorization failure
+                print("Authorisation failure")
+            }
+        }
         
         return cals_output
+        
+
     }
     
 }
@@ -125,8 +130,6 @@ struct Provider: TimelineProvider {
         print("Checking authorisation")
         // Get authorised:
         if MyHealthStore.isHealthDataAvailable() {
-            print("Requesting authorisation")
-            burnedCalorieLoader.requestAuthorization()
             print("Fetching calories")
             // Get burned calories
             burned_calories = burnedCalorieLoader.fetch()

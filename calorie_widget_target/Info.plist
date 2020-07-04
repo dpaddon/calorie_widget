@@ -24,6 +24,12 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>NSHealthShareUsageDescription - 2</key>
+	<string>Calorie Widget needs to access your Health records in order to display today&apos;s calories</string>
+	<key>NSHealthUpdateUsageDescription - 2</key>
+	<string>Calorie Widget needs to access your Health records in order to display today&apos;s calories</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>

@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Calorie Widget needs to access your Health records in order to display today&apos;s calories</string>
-	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Calorie Widget needs to access your Health records in order to display the calories burned today</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Calorie Widget needs to access your Health records in order to display the calories burned today</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -26,6 +20,16 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Calorie Widget needs to access your Health records in order to display the calories burned today</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Calorie Widget needs to access your Health records in order to display the calories burned today</string>
+	<key>NSHealthShareUsageDescription - 2</key>
+	<string>Calorie Widget needs to access your Health records in order to display today's calories</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Calorie Widget needs to access your Health records in order to display today's calories</string>
+	<key>NSHealthUpdateUsageDescription - 2</key>
+	<string>Calorie Widget needs to access your Health records in order to display today's calories</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
