@@ -10,7 +10,7 @@ import HealthKit
 
 
 class MyHealthStore: HKHealthStore {
-    func TodayTotalActiveCalories(completion: @escaping (_ activeCaloriesRetrieved: Double) -> Void) {
+    func TodayTotalActiveCalories(completion: @escaping (_ totalActiveCalories: Double?,Error?) -> Void) {
 
         guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
             fatalError("*** Unable to create an activeEnergyBurned type ***")
@@ -41,18 +41,18 @@ class MyHealthStore: HKHealthStore {
             if let myResults = results{  myResults.enumerateStatistics(from: startDate!, to: endDate as Date) { statistics, stop in
                 if let quantity = statistics.sumQuantity(){
                     //let date = statistics.startDate
-                    totalActiveCalories = quantity.doubleValue(for: HKUnit.count())
+                    totalActiveCalories = quantity.doubleValue(for: HKUnit.kilocalorie())
+                    print("Total active calories: ", totalActiveCalories)
                    // print("\(date): ActiveCalories = \(ActiveCalories)")
                 }
-
-                //completion(activeCaloriesRetrieved: totalActiveCalories)
-
+                completion(totalActiveCalories, nil)
                 }
             } else {
                 // mostly not executed
-                completion(totalActiveCalories)
+//                completion(totalActiveCalories)
             }
         }
         execute(ActiveCaloriesQuery)
     }
+    
 }

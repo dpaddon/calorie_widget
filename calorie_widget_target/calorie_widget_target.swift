@@ -36,8 +36,10 @@ struct Provider: TimelineProvider {
         if MyHealthStore.isHealthDataAvailable() {
             print("Fetching calories")
             // Get burned calories
-            burned_calories = calorieSession.fetch()
+            calorieSession.fetch()
+            burned_calories = calorieSession.cals_output
             print("Fetched calories...")
+            print(burned_calories)
         } else {
             print("Health kit not available")
             burned_calories = BurnedCalorieCount(active: 0, resting: 0, total: 0)

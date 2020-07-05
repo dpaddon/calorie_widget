@@ -38,20 +38,25 @@ class CalorieManager: NSObject, ObservableObject {
         }
     }
     
-    public func fetch() -> BurnedCalorieCount {
-        var cals_output = BurnedCalorieCount(active: 1, resting: 2, total: 42)
-        var activeCals=0
+    var cals_output = BurnedCalorieCount(active: 0, resting: 0, total: 0)
+    
+    public func fetch() -> Void {
+        var activeCals = 0
         
-        healthStore.TodayTotalActiveCalories { (activeCaloriesRetrieved) in
-            activeCals = Int(activeCaloriesRetrieved)
-        }
+        healthStore.TodayTotalActiveCalories(completion: { totalActiveCalories, error -> Void in
+            if let totalActiveCalories = totalActiveCalories {
+                activeCals = Int(totalActiveCalories)
+                print("activeCals inside call: ", activeCals)
+                let restingCals = 5
+                let totalCals = activeCals + restingCals
+                
+                print("Assigning self.cals_output")
+                self.cals_output = BurnedCalorieCount(active: activeCals, resting: restingCals, total: totalCals)
+            }
+        })
+        
 
-        let restingCals = 5
-        let totalCals = activeCals + restingCals
         
-        cals_output = BurnedCalorieCount(active: activeCals, resting: restingCals, total: totalCals)
-        
-        return cals_output
     }
     
     
