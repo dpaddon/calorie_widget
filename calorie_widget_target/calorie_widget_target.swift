@@ -10,110 +10,14 @@ import SwiftUI
 import HealthKit
 
 
-class MyHealthStore: HKHealthStore {
-    func TodayTotalActiveCalories(completion: @escaping (_ activeCaloriesRetrieved: Double) -> Void) {
-
-        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
-            fatalError("*** Unable to create an activeEnergyBurned type ***")
-        }
-
-        let calendar = NSCalendar.current
-        let interval = NSDateComponents()
-        interval.day = 1
-
-        var anchorComponents = calendar.dateComponents([.day , .month , .year], from: NSDate() as Date)
-        anchorComponents.hour = 0
-        
-        guard let anchorDate = calendar.date(from: anchorComponents) else {
-            fatalError("*** unable to create a valid date from the given components ***")
-        }
-
-        let ActiveCaloriesQuery = HKStatisticsCollectionQuery(quantityType: quantityType,
-                                                quantitySamplePredicate: nil,
-                                                options: .cumulativeSum,
-                                                anchorDate: anchorDate,
-                                                intervalComponents: interval as DateComponents)
-        
-        ActiveCaloriesQuery.initialResultsHandler = {query, results, error in
-            let endDate = NSDate()
-
-            var totalActiveCalories = 0.0
-            let startDate = calendar.date(byAdding: .day, value: 0, to: endDate as Date)
-            if let myResults = results{  myResults.enumerateStatistics(from: startDate!, to: endDate as Date) { statistics, stop in
-                if let quantity = statistics.sumQuantity(){
-                    //let date = statistics.startDate
-                    totalActiveCalories = quantity.doubleValue(for: HKUnit.count())
-                   // print("\(date): ActiveCalories = \(ActiveCalories)")
-                }
-
-                //completion(activeCaloriesRetrieved: totalActiveCalories)
-
-                }
-            } else {
-                // mostly not executed
-                completion(totalActiveCalories)
-            }
-        }
-        execute(ActiveCaloriesQuery)
-    }
-}
-
-
-
-// Utility function - this needs to get the calories using healthKit
-// For now we will just hardcode them
-struct BurnedCalorieLoader {
-    
-    func fetch() -> BurnedCalorieCount {
-        
-        var cals_output = BurnedCalorieCount(active: 1, resting: 2, total: 42)
-
-        // Requesting authorization.
-        /// - Tag: RequestAuthorization
-        // The quantity types to read from the health store.
-        let typesToWrite: Set = ([
-            HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
-        ])
-        let typesToRead: Set = ([
-            HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
-        ])
-        
-        let healthKitStore = MyHealthStore()
-        healthKitStore.requestAuthorization(toShare: typesToWrite, read: typesToRead) { (success, error) -> Void in
-            if(success){
-                    // Read or write the HealthKit data
-                var activeCals=0
-                
-                healthKitStore.TodayTotalActiveCalories { (activeCaloriesRetrieved) in
-                    activeCals = Int(activeCaloriesRetrieved)
-                }
-
-                let restingCals = 5
-                let totalCals = activeCals + restingCals
-                
-                cals_output = BurnedCalorieCount(active: activeCals, resting: restingCals, total: totalCals)
-                
-            }
-            else{
-                    // Authorization failure
-                print("Authorisation failure")
-            }
-        }
-        
-        return cals_output
-        
-
-    }
-    
-}
-
 
 // This is the bit which actually creates the timeline
 // This has 2 methods we need to implement - snapshot() and timeline()
 struct Provider: TimelineProvider {
     public typealias Entry = SimpleEntry
     
-    let burnedCalorieLoader = BurnedCalorieLoader()
+//    @EnvironmentObject var calorieSession: CalorieManager
+    let calorieSession = CalorieManager()
 
     public func snapshot(with context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let burned_calories = BurnedCalorieCount(active: 1, resting: 2, total: 3)
@@ -132,7 +36,8 @@ struct Provider: TimelineProvider {
         if MyHealthStore.isHealthDataAvailable() {
             print("Fetching calories")
             // Get burned calories
-            burned_calories = burnedCalorieLoader.fetch()
+            burned_calories = calorieSession.fetch()
+            print("Fetched calories...")
         } else {
             print("Health kit not available")
             burned_calories = BurnedCalorieCount(active: 0, resting: 0, total: 0)
@@ -145,12 +50,6 @@ struct Provider: TimelineProvider {
     }
 }
 
-// This struct holds the calories to display
-struct BurnedCalorieCount {
-    let active: Int
-    let resting: Int
-    let total: Int
-}
 
 // This bit is what controls what gets loaded when
 struct SimpleEntry: TimelineEntry {

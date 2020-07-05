@@ -18,6 +18,12 @@
 		65AA36F224A5DE4800B69C88 /* calorie_widget_target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA36F124A5DE4800B69C88 /* calorie_widget_target.swift */; };
 		65AA36F424A5DE4B00B69C88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AA36F324A5DE4B00B69C88 /* Assets.xcassets */; };
 		65AA36F824A5DE4B00B69C88 /* calorie_widget_targetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65AA36EA24A5DE4800B69C88 /* calorie_widget_targetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		65B73B3324B1EEB1006A8FFF /* CalorieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B73B3224B1EEB1006A8FFF /* CalorieManager.swift */; };
+		65B73B3524B1EFF3006A8FFF /* MyHealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B73B3424B1EFF3006A8FFF /* MyHealthStore.swift */; };
+		65B73B3824B1F506006A8FFF /* BurnedCalorieCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B73B3724B1F505006A8FFF /* BurnedCalorieCount.swift */; };
+		65B73B3924B1F51B006A8FFF /* BurnedCalorieCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B73B3724B1F505006A8FFF /* BurnedCalorieCount.swift */; };
+		65B73B3A24B1F782006A8FFF /* MyHealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B73B3424B1EFF3006A8FFF /* MyHealthStore.swift */; };
+		65B73B3B24B1F785006A8FFF /* CalorieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B73B3224B1EEB1006A8FFF /* CalorieManager.swift */; };
 		65E7797B24A8E4550011A522 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E7797A24A8E4550011A522 /* HealthKit.framework */; };
 		65F4CAB024B0EB4800D2CAB0 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E7797A24A8E4550011A522 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
@@ -79,6 +85,9 @@
 		65AA36F124A5DE4800B69C88 /* calorie_widget_target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calorie_widget_target.swift; sourceTree = "<group>"; };
 		65AA36F324A5DE4B00B69C88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65AA36F524A5DE4B00B69C88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65B73B3224B1EEB1006A8FFF /* CalorieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieManager.swift; sourceTree = "<group>"; };
+		65B73B3424B1EFF3006A8FFF /* MyHealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHealthStore.swift; sourceTree = "<group>"; };
+		65B73B3724B1F505006A8FFF /* BurnedCalorieCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedCalorieCount.swift; sourceTree = "<group>"; };
 		65E7797924A8E4550011A522 /* calorie_widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calorie_widget.entitlements; sourceTree = "<group>"; };
 		65E7797A24A8E4550011A522 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		65F4CAAF24B0EB4800D2CAB0 /* calorie_widget_targetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calorie_widget_targetExtension.entitlements; sourceTree = "<group>"; };
@@ -197,6 +206,9 @@
 			isa = PBXGroup;
 			children = (
 				65AA36F124A5DE4800B69C88 /* calorie_widget_target.swift */,
+				65B73B3724B1F505006A8FFF /* BurnedCalorieCount.swift */,
+				65B73B3424B1EFF3006A8FFF /* MyHealthStore.swift */,
+				65B73B3224B1EEB1006A8FFF /* CalorieManager.swift */,
 				65AA36F324A5DE4B00B69C88 /* Assets.xcassets */,
 				65AA36F524A5DE4B00B69C88 /* Info.plist */,
 			);
@@ -367,7 +379,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AA36BE24A5DE0300B69C88 /* ContentView.swift in Sources */,
+				65B73B3824B1F506006A8FFF /* BurnedCalorieCount.swift in Sources */,
+				65B73B3324B1EEB1006A8FFF /* CalorieManager.swift in Sources */,
 				65AA36BC24A5DE0300B69C88 /* calorie_widgetApp.swift in Sources */,
+				65B73B3524B1EFF3006A8FFF /* MyHealthStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +407,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AA36F224A5DE4800B69C88 /* calorie_widget_target.swift in Sources */,
+				65B73B3B24B1F785006A8FFF /* CalorieManager.swift in Sources */,
+				65B73B3924B1F51B006A8FFF /* BurnedCalorieCount.swift in Sources */,
+				65B73B3A24B1F782006A8FFF /* MyHealthStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct calorie_widgetApp: App {
+    var calorieManager = CalorieManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(calorieManager)
         }
     }
     
