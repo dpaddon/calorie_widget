@@ -10,11 +10,7 @@ import HealthKit
 
 
 class MyHealthStore: HKHealthStore {
-    func TodayTotalActiveCalories(completion: @escaping (_ totalActiveCalories: Double?,Error?) -> Void) {
-
-        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
-            fatalError("*** Unable to create an activeEnergyBurned type ***")
-        }
+    func TodayTotalActiveCalories(quantityType: HKQuantityType, completion: @escaping (_ totalActiveCalories: Double?,Error?) -> Void) {
 
         let calendar = NSCalendar.current
         let interval = NSDateComponents()

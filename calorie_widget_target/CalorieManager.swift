@@ -44,20 +44,35 @@ class CalorieManager: NSObject, ObservableObject {
     }
     
     public func fetch() -> Void {
-//        var activeCals = 0
         
-        healthStore.TodayTotalActiveCalories(completion: { totalActiveCalories, error -> Void in
+        // Get the active calories
+        guard let activeQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
+            fatalError("*** Unable to create an activeEnergyBurned type ***")
+        }
+        healthStore.TodayTotalActiveCalories(quantityType: activeQuantityType, completion: { totalActiveCalories, error -> Void in
             if let totalActiveCalories = totalActiveCalories {
                 self.activeCaloriesBurned = Int(totalActiveCalories)
-                self.basalCaloriesBurned = 0 // Get the basal calories here
-                self.totalCaloriesBurned = self.activeCaloriesBurned + self.basalCaloriesBurned
-                
-                print("Assigning self.burnedCalorieOutput")
-                self.burnedCalorieOutput = BurnedCalorieCount(active: self.activeCaloriesBurned,
-                                                              resting: self.basalCaloriesBurned,
-                                                              total: self.totalCaloriesBurned)
             }
         })
+        
+        // Get the resting/basal calories
+        guard let basalQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.basalEnergyBurned) else {
+            fatalError("*** Unable to create an activeEnergyBurned type ***")
+        }
+        healthStore.TodayTotalActiveCalories(quantityType: basalQuantityType, completion: { totalActiveCalories, error -> Void in
+            if let totalActiveCalories = totalActiveCalories {
+                self.basalCaloriesBurned = Int(totalActiveCalories)
+            }
+        })
+        
+        // Add 'em up
+        self.totalCaloriesBurned = self.activeCaloriesBurned + self.basalCaloriesBurned
+        
+        // Fire 'em out
+        print("Assigning self.burnedCalorieOutput")
+        self.burnedCalorieOutput = BurnedCalorieCount(active: self.activeCaloriesBurned,
+                                                      resting: self.basalCaloriesBurned,
+                                                      total: self.totalCaloriesBurned)
         
 
         
