@@ -14,6 +14,11 @@ class CalorieManager: NSObject, ObservableObject {
     
     let healthStore = MyHealthStore()
     
+    var activeCaloriesBurned = 0
+    var basalCaloriesBurned = 0
+    var totalCaloriesBurned = 0
+    var burnedCalorieOutput = BurnedCalorieCount(active: 0, resting: 0, total: 0)
+    
     
     // Request authorization to access HealthKit.
     func requestAuthorization() {
@@ -38,20 +43,19 @@ class CalorieManager: NSObject, ObservableObject {
         }
     }
     
-    var cals_output = BurnedCalorieCount(active: 0, resting: 0, total: 0)
-    
     public func fetch() -> Void {
-        var activeCals = 0
+//        var activeCals = 0
         
         healthStore.TodayTotalActiveCalories(completion: { totalActiveCalories, error -> Void in
             if let totalActiveCalories = totalActiveCalories {
-                activeCals = Int(totalActiveCalories)
-                print("activeCals inside call: ", activeCals)
-                let restingCals = 5
-                let totalCals = activeCals + restingCals
+                self.activeCaloriesBurned = Int(totalActiveCalories)
+                self.basalCaloriesBurned = 0 // Get the basal calories here
+                self.totalCaloriesBurned = self.activeCaloriesBurned + self.basalCaloriesBurned
                 
-                print("Assigning self.cals_output")
-                self.cals_output = BurnedCalorieCount(active: activeCals, resting: restingCals, total: totalCals)
+                print("Assigning self.burnedCalorieOutput")
+                self.burnedCalorieOutput = BurnedCalorieCount(active: self.activeCaloriesBurned,
+                                                              resting: self.basalCaloriesBurned,
+                                                              total: self.totalCaloriesBurned)
             }
         })
         

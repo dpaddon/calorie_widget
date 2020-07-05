@@ -37,7 +37,7 @@ struct Provider: TimelineProvider {
             print("Fetching calories")
             // Get burned calories
             calorieSession.fetch()
-            burned_calories = calorieSession.cals_output
+            burned_calories = calorieSession.burnedCalorieOutput
             print("Fetched calories...")
             print(burned_calories)
         } else {
