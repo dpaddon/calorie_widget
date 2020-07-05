@@ -13,3 +13,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Invaluable insight into how to create a widget gleaned from this [SwiftRocks tutorial](https://swiftrocks.com/ios-14-widget-tutorial-mini-apps)
 * [StackoverFlow answer](https://stackoverflow.com/a/40626985/9961901) explaining how to query HealthKit for daily totals of metrics
+* More learning about HealthKit from [here](https://gitlab.com/agostini.tech/ATHealthKit) and [here](https://www.raywenderlich.com/459-healthkit-tutorial-with-swift-getting-started)
+* [This example](https://developer.apple.com/documentation/healthkit/workouts_and_activity_rings/speedysloth_creating_a_workout) from the Apple Developer documentation
