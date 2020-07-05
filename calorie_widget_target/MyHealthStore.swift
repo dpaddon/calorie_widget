@@ -10,7 +10,7 @@ import HealthKit
 
 
 class MyHealthStore: HKHealthStore {
-    func TodayTotalActiveCalories(quantityType: HKQuantityType, completion: @escaping (_ totalActiveCalories: Double?,Error?) -> Void) {
+    func TodayCalories(quantityType: HKQuantityType, completion: @escaping (_ todayCalories: Double?,Error?) -> Void) {
 
         let calendar = NSCalendar.current
         let interval = NSDateComponents()

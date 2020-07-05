@@ -49,9 +49,9 @@ class CalorieManager: NSObject, ObservableObject {
         guard let activeQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
             fatalError("*** Unable to create an activeEnergyBurned type ***")
         }
-        healthStore.TodayTotalActiveCalories(quantityType: activeQuantityType, completion: { totalActiveCalories, error -> Void in
-            if let totalActiveCalories = totalActiveCalories {
-                self.activeCaloriesBurned = Int(totalActiveCalories)
+        healthStore.TodayCalories(quantityType: activeQuantityType, completion: { todayCalories, error -> Void in
+            if let todayCalories = todayCalories {
+                self.activeCaloriesBurned = Int(todayCalories)
             }
         })
         
@@ -59,9 +59,9 @@ class CalorieManager: NSObject, ObservableObject {
         guard let basalQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.basalEnergyBurned) else {
             fatalError("*** Unable to create an activeEnergyBurned type ***")
         }
-        healthStore.TodayTotalActiveCalories(quantityType: basalQuantityType, completion: { totalActiveCalories, error -> Void in
-            if let totalActiveCalories = totalActiveCalories {
-                self.basalCaloriesBurned = Int(totalActiveCalories)
+        healthStore.TodayCalories(quantityType: basalQuantityType, completion: { todayCalories, error -> Void in
+            if let todayCalories = todayCalories {
+                self.basalCaloriesBurned = Int(todayCalories)
             }
         })
         
