@@ -4,6 +4,14 @@ The Apple Health app only shows you your active and resting calories for the day
 
 Home screen widgets will be released with iOS 14, and this seems to be a good project to learn Swift.
 
+Example screenshot:
+
+![Example of the widget on an iPhone 11 Pro](./widget_screenshot.png)
+
+## TODO: 
+
+* Create medium sized widget including graph of calories burned over last 7 days
+* Make widget configurable, with option to show "net" calories (when including dietary calories)
 
 ## License
 
