@@ -20,14 +20,14 @@ struct Provider: TimelineProvider {
     let calorieSession = CalorieManager()
 
     public func snapshot(with context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let burned_calories = BurnedCalorieCount(active: 1, resting: 2, total: 3)
+        let burned_calories = BurnedCalorieCount(active: 1, resting: 2, total: 1234)
         let entry = SimpleEntry(date: Date(), burnedCalories: burned_calories)
         completion(entry)
     }
 
     public func timeline(with context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
         let currentDate = Date()
-        var burned_calories = BurnedCalorieCount(active: 1, resting: 2, total: 3)
+        var burned_calories: BurnedCalorieCount
         // Refresh every 5 mins
         let refreshDate = Calendar.current.date(byAdding: .second, value: 10, to: currentDate)!
 
@@ -69,25 +69,44 @@ struct PlaceholderView : View {
 // This view defines how the widget looks
 struct calorie_widget_targetEntryView : View {
     var entry: Provider.Entry
+    
+    var baseFontSize = 40.0
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text("\(String(entry.burnedCalories.total)) kcal")
-                .font(.system(.callout))
+        VStack(alignment: .trailing, spacing: 10) {
+            Text("\(formatCalories(calories: entry.burnedCalories.total))")
+                .font(.system(size: CGFloat(baseFontSize * 1), weight: .thin))
                 .foregroundColor(.white)
                 .bold()
-            Text("burned so far today \(Self.format(date:entry.date))")
-                .font(.system(.caption))
-                .foregroundColor(.white)
-        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
+            
+            HStack(alignment: .lastTextBaseline, spacing: 25) {
+                Image(systemName: "flame")
+                    .font(.system(size: CGFloat(baseFontSize * 0.6), weight: .thin))
+                    .imageScale(.large)
+                    .foregroundColor(.white)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
+                
+                Text("kcal")
+                    .font(.system(size: CGFloat(baseFontSize * 0.5), weight: .thin))
+                    .foregroundColor(.white)
+                    .bold()
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
+            }
+//            Text("burned so far today \(Self.format(date:entry.date))")
+//                .font(.system(.caption))
+//                .foregroundColor(.white)
+        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
             .padding()
-            .background(LinearGradient(gradient: Gradient(colors: [.yellow, .red]), startPoint: .topLeading, endPoint: .bottomTrailing))
+            .background(LinearGradient(gradient: Gradient(colors: [.yellow, .red]),                                   startPoint: .topLeading,
+                                       endPoint: .bottomTrailing))
     }
 
-    static func format(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM"
-        return formatter.string(from: date)
+    public func formatCalories(calories: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.usesGroupingSeparator = true
+        formatter.groupingSeparator = ","
+        formatter.numberStyle = .decimal
+        return formatter.string(from: calories as NSNumber)!
     }
 }
 
@@ -105,7 +124,7 @@ struct calorie_widget_target: Widget {
         }
         .configurationDisplayName("Today's calories")
         .description("Shows the total number of calories you've burned today")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
@@ -113,9 +132,13 @@ struct calorie_widget_target: Widget {
 struct calorie_widget_target_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            calorie_widget_targetEntryView(entry: SimpleEntry(date: Date(), burnedCalories: BurnedCalorieCount(active: 1, resting: 2, total: 3)))
+            calorie_widget_targetEntryView(entry: SimpleEntry(date: Date(), burnedCalories: BurnedCalorieCount(active: 1, resting: 2, total: 1234)))
                 .previewContext(WidgetPreviewContext(family:
                     .systemSmall))
+
+            calorie_widget_targetEntryView(entry: SimpleEntry(date: Date(), burnedCalories: BurnedCalorieCount(active: 1, resting: 2, total: 1234)))
+                .previewContext(WidgetPreviewContext(family:
+                    .systemMedium))
             
             PlaceholderView()
                 .previewContext(WidgetPreviewContext(family:
