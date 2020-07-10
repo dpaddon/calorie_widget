@@ -72,33 +72,67 @@ struct calorie_widget_targetEntryView : View {
     
     var baseFontSize = 40.0
 
+    @Environment(\.widgetFamily) var family
+    
+    @ViewBuilder
     var body: some View {
-        VStack(alignment: .trailing, spacing: 10) {
-            Text("\(formatCalories(calories: entry.burnedCalories.total))")
-                .font(.system(size: CGFloat(baseFontSize * 1), weight: .thin))
-                .foregroundColor(.white)
-                .bold()
-            
-            HStack(alignment: .lastTextBaseline, spacing: 25) {
-                Image(systemName: "flame")
-                    .font(.system(size: CGFloat(baseFontSize * 0.6), weight: .thin))
-                    .imageScale(.large)
-                    .foregroundColor(.white)
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
-                
-                Text("kcal")
-                    .font(.system(size: CGFloat(baseFontSize * 0.5), weight: .thin))
+        switch family {
+        case .systemMedium:
+            VStack(alignment: .trailing, spacing: 10) {
+                Text("\(formatCalories(calories: entry.burnedCalories.total))")
+                    .font(.system(size: CGFloat(baseFontSize * 1), weight: .thin))
                     .foregroundColor(.white)
                     .bold()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
-            }
-//            Text("burned so far today \(Self.format(date:entry.date))")
-//                .font(.system(.caption))
-//                .foregroundColor(.white)
-        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
-            .padding()
-            .background(LinearGradient(gradient: Gradient(colors: [.yellow, .red]),                                   startPoint: .topLeading,
-                                       endPoint: .bottomTrailing))
+                
+                HStack(alignment: .lastTextBaseline, spacing: 25) {
+                    Image(systemName: "flame")
+                        .font(.system(size: CGFloat(baseFontSize * 0.6), weight: .thin))
+                        .imageScale(.large)
+                        .foregroundColor(.white)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
+                    
+                    Text("kcal")
+                        .font(.system(size: CGFloat(baseFontSize * 0.5), weight: .thin))
+                        .foregroundColor(.white)
+                        .bold()
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
+                }
+    //            Text("burned so far today \(Self.format(date:entry.date))")
+    //                .font(.system(.caption))
+    //                .foregroundColor(.white)
+            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
+                .padding()
+                .background(LinearGradient(gradient: Gradient(colors: [.yellow, .red]),                                   startPoint: .topLeading,
+                                           endPoint: .bottomTrailing))
+            
+        default: // Small
+            VStack(alignment: .trailing, spacing: 10) {
+                Text("\(formatCalories(calories: entry.burnedCalories.total))")
+                    .font(.system(size: CGFloat(baseFontSize * 1), weight: .thin))
+                    .foregroundColor(.white)
+                    .bold()
+                
+                HStack(alignment: .lastTextBaseline, spacing: 25) {
+                    Image(systemName: "flame")
+                        .font(.system(size: CGFloat(baseFontSize * 0.6), weight: .thin))
+                        .imageScale(.large)
+                        .foregroundColor(.white)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
+                    
+                    Text("kcal")
+                        .font(.system(size: CGFloat(baseFontSize * 0.5), weight: .thin))
+                        .foregroundColor(.white)
+                        .bold()
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
+                }
+    //            Text("burned so far today \(Self.format(date:entry.date))")
+    //                .font(.system(.caption))
+    //                .foregroundColor(.white)
+            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
+                .padding()
+                .background(LinearGradient(gradient: Gradient(colors: [.yellow, .red]),                                   startPoint: .topLeading,
+                                           endPoint: .bottomTrailing))
+        }
     }
 
     public func formatCalories(calories: Int) -> String {
