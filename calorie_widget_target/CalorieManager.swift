@@ -19,6 +19,8 @@ class CalorieManager: NSObject, ObservableObject {
     var totalCaloriesBurned = 0
     var burnedCalorieOutput = BurnedCalorieCount(active: 0, resting: 0, total: 0)
     
+    var weeklyCalsDict: [Date:Int] = [:]
+    
     
     // Request authorization to access HealthKit.
     func requestAuthorization() {
@@ -74,10 +76,15 @@ class CalorieManager: NSObject, ObservableObject {
                                                       resting: self.basalCaloriesBurned,
                                                       total: self.totalCaloriesBurned)
         
-
+        healthStore.getWeekCalsByDay(completion: {weeklyCalOutput, error -> Void in
+            if let weeklyCalOutput = weeklyCalOutput {
+                self.weeklyCalsDict = weeklyCalOutput
+            }
+        })
         
     }
     
+
     
     
 }

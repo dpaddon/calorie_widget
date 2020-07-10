@@ -21,7 +21,7 @@ struct Provider: TimelineProvider {
 
     public func snapshot(with context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let burned_calories = BurnedCalorieCount(active: 1, resting: 2, total: 1234)
-        let entry = SimpleEntry(date: Date(), burnedCalories: burned_calories)
+        let entry = SimpleEntry(date: Date(), burnedCalories: burned_calories, sortedWeeklyCals: [1,2,3,4,5,6,7])
         completion(entry)
     }
 
@@ -45,8 +45,13 @@ struct Provider: TimelineProvider {
             burned_calories = BurnedCalorieCount(active: 0, resting: 0, total: 0)
         }
         
+        // Get the sorted calories
+        var sortedWeeklyCals = [1,2,3,4,5,6,7]
         
-        let entry = SimpleEntry(date: currentDate, burnedCalories: burned_calories)
+        
+        let entry = SimpleEntry(date: currentDate,
+                                burnedCalories: burned_calories,
+                                sortedWeeklyCals: sortedWeeklyCals)
         let timeline = Timeline(entries: [entry], policy: .after(refreshDate))
         completion(timeline)
     }
@@ -57,12 +62,14 @@ struct Provider: TimelineProvider {
 struct SimpleEntry: TimelineEntry {
     public let date: Date
     public let burnedCalories: BurnedCalorieCount
+    public let sortedWeeklyCals: [Int]
 }
 
 // This is the placeholder which gets displayed in the widget picker
 struct PlaceholderView : View {
     var body: some View {
-        Text("Loading calories...")
+        calorie_widget_targetEntryView(entry: SimpleEntry(date: Date(), burnedCalories: BurnedCalorieCount(active: 1, resting: 2, total: 1234),
+                                                          sortedWeeklyCals: [1,2,3,4,5,6,7]))
     }
 }
 
@@ -79,10 +86,22 @@ struct calorie_widget_targetEntryView : View {
         switch family {
         case .systemMedium:
             VStack(alignment: .trailing, spacing: 10) {
-                Text("\(formatCalories(calories: entry.burnedCalories.total))")
-                    .font(.system(size: CGFloat(baseFontSize * 1), weight: .thin))
-                    .foregroundColor(.white)
-                    .bold()
+                HStack(alignment: .lastTextBaseline, spacing: 25) {
+                    HStack(alignment: .center, spacing: 10)
+                    {
+                        ForEach(entry.sortedWeeklyCals, id: \.self){
+                            data in
+
+                            BarView(value: CGFloat(data), cornerRadius: CGFloat(integerLiteral: 10))
+                        }
+                    }.padding(.top, 24).animation(.default)
+                    
+                    
+                    Text("\(formatCalories(calories: entry.burnedCalories.total))")
+                        .font(.system(size: CGFloat(baseFontSize * 1), weight: .thin))
+                        .foregroundColor(.white)
+                        .bold()
+                }
                 
                 HStack(alignment: .lastTextBaseline, spacing: 25) {
                     Image(systemName: "flame")
@@ -97,9 +116,7 @@ struct calorie_widget_targetEntryView : View {
                         .bold()
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
                 }
-    //            Text("burned so far today \(Self.format(date:entry.date))")
-    //                .font(.system(.caption))
-    //                .foregroundColor(.white)
+
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
                 .padding()
                 .background(LinearGradient(gradient: Gradient(colors: [.yellow, .red]),                                   startPoint: .topLeading,
@@ -125,9 +142,6 @@ struct calorie_widget_targetEntryView : View {
                         .bold()
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
                 }
-    //            Text("burned so far today \(Self.format(date:entry.date))")
-    //                .font(.system(.caption))
-    //                .foregroundColor(.white)
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
                 .padding()
                 .background(LinearGradient(gradient: Gradient(colors: [.yellow, .red]),                                   startPoint: .topLeading,
@@ -166,11 +180,13 @@ struct calorie_widget_target: Widget {
 struct calorie_widget_target_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            calorie_widget_targetEntryView(entry: SimpleEntry(date: Date(), burnedCalories: BurnedCalorieCount(active: 1, resting: 2, total: 1234)))
+            calorie_widget_targetEntryView(entry: SimpleEntry(date: Date(), burnedCalories: BurnedCalorieCount(active: 1, resting: 2, total: 1234),
+                                                              sortedWeeklyCals: [1,2,3,4,5,6,7]))
                 .previewContext(WidgetPreviewContext(family:
                     .systemSmall))
 
-            calorie_widget_targetEntryView(entry: SimpleEntry(date: Date(), burnedCalories: BurnedCalorieCount(active: 1, resting: 2, total: 1234)))
+            calorie_widget_targetEntryView(entry: SimpleEntry(date: Date(), burnedCalories: BurnedCalorieCount(active: 1, resting: 2, total: 1234),
+                                                              sortedWeeklyCals: [1,2,3,4,5,6,7]))
                 .previewContext(WidgetPreviewContext(family:
                     .systemMedium))
             

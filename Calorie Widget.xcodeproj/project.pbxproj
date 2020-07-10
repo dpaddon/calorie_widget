@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		652F2BD124B92C03002F673E /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F2BD024B92BF3002F673E /* BarView.swift */; };
 		65AA36BC24A5DE0300B69C88 /* calorie_widgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA36BB24A5DE0300B69C88 /* calorie_widgetApp.swift */; };
 		65AA36BE24A5DE0300B69C88 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA36BD24A5DE0300B69C88 /* ContentView.swift */; };
 		65AA36C024A5DE0400B69C88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AA36BF24A5DE0400B69C88 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		652F2BD024B92BF3002F673E /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		65AA36B824A5DE0300B69C88 /* calorie_widget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calorie_widget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65AA36BB24A5DE0300B69C88 /* calorie_widgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calorie_widgetApp.swift; sourceTree = "<group>"; };
 		65AA36BD24A5DE0300B69C88 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				65AA36F124A5DE4800B69C88 /* calorie_widget_target.swift */,
+				652F2BD024B92BF3002F673E /* BarView.swift */,
 				65B73B3724B1F505006A8FFF /* BurnedCalorieCount.swift */,
 				65B73B3424B1EFF3006A8FFF /* MyHealthStore.swift */,
 				65B73B3224B1EEB1006A8FFF /* CalorieManager.swift */,
@@ -410,6 +413,7 @@
 				65B73B3B24B1F785006A8FFF /* CalorieManager.swift in Sources */,
 				65B73B3924B1F51B006A8FFF /* BurnedCalorieCount.swift in Sources */,
 				65B73B3A24B1F782006A8FFF /* MyHealthStore.swift in Sources */,
+				652F2BD124B92C03002F673E /* BarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
