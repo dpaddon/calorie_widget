@@ -8,7 +8,7 @@
 import Foundation
 
 public func ScaleWeeklyCals(arr: [Int]) -> [Int] {
-    let maxBarHeight = 35 * 0.9 // We want the highest val this week to display as 95% of the max bar height
+    let maxBarHeight = 45 * 0.9 // We want the highest val this week to display as 95% of the max bar height
     let maxCals = arr.max() ?? 2500
     var scale = 1.0
     
