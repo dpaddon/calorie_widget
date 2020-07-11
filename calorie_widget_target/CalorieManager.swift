@@ -20,6 +20,7 @@ class CalorieManager: NSObject, ObservableObject {
     var burnedCalorieOutput = BurnedCalorieCount(active: 0, resting: 0, total: 0)
     
     var weeklyCalsDict: [Date:Int] = [:]
+    var weeklyCalsSortedList: [Int] = []
     
     
     // Request authorization to access HealthKit.
@@ -81,6 +82,11 @@ class CalorieManager: NSObject, ObservableObject {
                 self.weeklyCalsDict = weeklyCalOutput
             }
         })
+        
+        self.weeklyCalsSortedList = GetValuesBySortedKeys(dict: self.weeklyCalsDict)
+        
+        self.weeklyCalsSortedList = ScaleWeeklyCals(arr: self.weeklyCalsSortedList)
+        
         
     }
     

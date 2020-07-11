@@ -83,7 +83,7 @@ class MyHealthStore: HKHealthStore {
             
             guard let statsCollection = results else {
                 // Perform proper error handling here
-                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
+                fatalError("*** An error occurred while calculating the statistics: \(String(describing: error?.localizedDescription)) ***")
             }
             
             let endDate = NSDate()

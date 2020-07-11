@@ -46,7 +46,7 @@ struct Provider: TimelineProvider {
         }
         
         // Get the sorted calories
-        var sortedWeeklyCals = [1,2,3,4,5,6,7]
+        let sortedWeeklyCals = calorieSession.weeklyCalsSortedList
         
         
         let entry = SimpleEntry(date: currentDate,
@@ -91,16 +91,16 @@ struct calorie_widget_targetEntryView : View {
                     {
                         ForEach(entry.sortedWeeklyCals, id: \.self){
                             data in
-
-                            BarView(value: CGFloat(data), cornerRadius: CGFloat(integerLiteral: 10))
+                            BarView(value: CGFloat(data))
                         }
-                    }.padding(.top, 24).animation(.default)
-                    
+                    }.padding(.top, 24)
+                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
                     
                     Text("\(formatCalories(calories: entry.burnedCalories.total))")
                         .font(.system(size: CGFloat(baseFontSize * 1), weight: .thin))
                         .foregroundColor(.white)
                         .bold()
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
                 }
                 
                 HStack(alignment: .lastTextBaseline, spacing: 25) {
