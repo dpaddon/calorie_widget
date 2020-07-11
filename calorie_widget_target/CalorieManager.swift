@@ -103,7 +103,11 @@ class CalorieManager: NSObject, ObservableObject {
         
         self.weeklyTotalCalsSortedList = zip(self.weeklyActiveCalsSortedList,self.weeklyRestingCalsSortedList).map(+)
         
-        self.weeklyRestingCalsSortedList = ScaleWeeklyCals(arr: self.weeklyRestingCalsSortedList)
+        self.weeklyTotalCalsSortedList = ScaleWeeklyCals(arr: self.weeklyTotalCalsSortedList)
+        
+        self.weeklyTotalCalsSortedList.reverse()
+        
+        print(self.weeklyTotalCalsSortedList)
         
         
     }
