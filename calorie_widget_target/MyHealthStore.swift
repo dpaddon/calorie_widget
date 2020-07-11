@@ -51,7 +51,7 @@ class MyHealthStore: HKHealthStore {
         execute(ActiveCaloriesQuery)
     }
     
-    public func getWeekCalsByDay(completion: @escaping (_ weeklyCalOutput: Dictionary<Date,Int>?,Error?) -> Void) {
+    public func getWeekCalsByDay(quantityType: HKQuantityType, completion: @escaping (_ weeklyCalOutput: Dictionary<Date,Int>?,Error?) -> Void) {
         var weeklyCalOutput: [Date: Int] = [:]
         let calendar = NSCalendar.current
          
@@ -64,10 +64,6 @@ class MyHealthStore: HKHealthStore {
          
         guard let anchorDate = calendar.date(from: anchorComponents) else {
             fatalError("*** unable to create a valid date from the given components ***")
-        }
-         
-        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
-            fatalError("*** Unable to create a step count type ***")
         }
          
         // Create the query

@@ -19,8 +19,12 @@ class CalorieManager: NSObject, ObservableObject {
     var totalCaloriesBurned = 0
     var burnedCalorieOutput = BurnedCalorieCount(active: 0, resting: 0, total: 0)
     
-    var weeklyCalsDict: [Date:Int] = [:]
-    var weeklyCalsSortedList: [Int] = []
+    var weeklyActiveCalsDict: [Date:Int] = [:]
+    var weeklyRestingCalsDict: [Date:Int] = [:]
+    
+    var weeklyActiveCalsSortedList: [Int] = []
+    var weeklyRestingCalsSortedList: [Int] = []
+    var weeklyTotalCalsSortedList: [Int] = []
     
     
     // Request authorization to access HealthKit.
@@ -48,10 +52,14 @@ class CalorieManager: NSObject, ObservableObject {
     
     public func fetch() -> Void {
         
-        // Get the active calories
         guard let activeQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
             fatalError("*** Unable to create an activeEnergyBurned type ***")
         }
+        guard let basalQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.basalEnergyBurned) else {
+            fatalError("*** Unable to create an activeEnergyBurned type ***")
+        }
+        
+        // Get the active calories
         healthStore.TodayCalories(quantityType: activeQuantityType, completion: { todayCalories, error -> Void in
             if let todayCalories = todayCalories {
                 self.activeCaloriesBurned = Int(todayCalories)
@@ -59,9 +67,6 @@ class CalorieManager: NSObject, ObservableObject {
         })
         
         // Get the resting/basal calories
-        guard let basalQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.basalEnergyBurned) else {
-            fatalError("*** Unable to create an activeEnergyBurned type ***")
-        }
         healthStore.TodayCalories(quantityType: basalQuantityType, completion: { todayCalories, error -> Void in
             if let todayCalories = todayCalories {
                 self.basalCaloriesBurned = Int(todayCalories)
@@ -77,15 +82,28 @@ class CalorieManager: NSObject, ObservableObject {
                                                       resting: self.basalCaloriesBurned,
                                                       total: self.totalCaloriesBurned)
         
-        healthStore.getWeekCalsByDay(completion: {weeklyCalOutput, error -> Void in
+        // Get the summary stats for the week
+        
+        // Active calories
+        healthStore.getWeekCalsByDay(quantityType: activeQuantityType, completion: {weeklyCalOutput, error -> Void in
             if let weeklyCalOutput = weeklyCalOutput {
-                self.weeklyCalsDict = weeklyCalOutput
+                self.weeklyActiveCalsDict = weeklyCalOutput
+            }
+        })
+
+        // Resting calories
+        healthStore.getWeekCalsByDay(quantityType: basalQuantityType, completion: {weeklyCalOutput, error -> Void in
+            if let weeklyCalOutput = weeklyCalOutput {
+                self.weeklyRestingCalsDict = weeklyCalOutput
             }
         })
         
-        self.weeklyCalsSortedList = GetValuesBySortedKeys(dict: self.weeklyCalsDict)
+        self.weeklyActiveCalsSortedList = GetValuesBySortedKeys(dict: self.weeklyActiveCalsDict)
+        self.weeklyRestingCalsSortedList = GetValuesBySortedKeys(dict: self.weeklyRestingCalsDict)
         
-        self.weeklyCalsSortedList = ScaleWeeklyCals(arr: self.weeklyCalsSortedList)
+        self.weeklyTotalCalsSortedList = zip(self.weeklyActiveCalsSortedList,self.weeklyRestingCalsSortedList).map(+)
+        
+        self.weeklyRestingCalsSortedList = ScaleWeeklyCals(arr: self.weeklyRestingCalsSortedList)
         
         
     }

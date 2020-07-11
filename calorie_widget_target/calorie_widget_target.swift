@@ -46,7 +46,7 @@ struct Provider: TimelineProvider {
         }
         
         // Get the sorted calories
-        let sortedWeeklyCals = calorieSession.weeklyCalsSortedList
+        let sortedWeeklyCals = calorieSession.weeklyRestingCalsSortedList
         
         
         let entry = SimpleEntry(date: currentDate,
