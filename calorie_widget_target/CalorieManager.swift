@@ -98,8 +98,8 @@ class CalorieManager: NSObject, ObservableObject {
             }
         })
         
-        self.weeklyActiveCalsSortedList = GetValuesBySortedKeys(dict: self.weeklyActiveCalsDict)
-        self.weeklyRestingCalsSortedList = GetValuesBySortedKeys(dict: self.weeklyRestingCalsDict)
+        self.weeklyActiveCalsSortedList = GetValuesByLastSevenDays(dict: self.weeklyActiveCalsDict)
+        self.weeklyRestingCalsSortedList = GetValuesByLastSevenDays(dict: self.weeklyRestingCalsDict)
         
         self.weeklyTotalCalsSortedList = zip(self.weeklyActiveCalsSortedList,self.weeklyRestingCalsSortedList).map(+)
         

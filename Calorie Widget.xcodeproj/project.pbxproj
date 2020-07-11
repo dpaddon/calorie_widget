@@ -12,6 +12,8 @@
 		652F2BD424B98FA4002F673E /* GetValuesBySortedKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F2BD224B98C90002F673E /* GetValuesBySortedKeys.swift */; };
 		652F2BD624B99070002F673E /* ScaleWeeklyCals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F2BD524B99070002F673E /* ScaleWeeklyCals.swift */; };
 		652F2BD724B99070002F673E /* ScaleWeeklyCals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F2BD524B99070002F673E /* ScaleWeeklyCals.swift */; };
+		652F2BD924B99719002F673E /* GetValuesByLastSevenDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F2BD824B99719002F673E /* GetValuesByLastSevenDays.swift */; };
+		652F2BDA24B99719002F673E /* GetValuesByLastSevenDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F2BD824B99719002F673E /* GetValuesByLastSevenDays.swift */; };
 		65AA36BC24A5DE0300B69C88 /* calorie_widgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA36BB24A5DE0300B69C88 /* calorie_widgetApp.swift */; };
 		65AA36BE24A5DE0300B69C88 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA36BD24A5DE0300B69C88 /* ContentView.swift */; };
 		65AA36C024A5DE0400B69C88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AA36BF24A5DE0400B69C88 /* Assets.xcassets */; };
@@ -75,6 +77,7 @@
 		652F2BD024B92BF3002F673E /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		652F2BD224B98C90002F673E /* GetValuesBySortedKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetValuesBySortedKeys.swift; sourceTree = "<group>"; };
 		652F2BD524B99070002F673E /* ScaleWeeklyCals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleWeeklyCals.swift; sourceTree = "<group>"; };
+		652F2BD824B99719002F673E /* GetValuesByLastSevenDays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetValuesByLastSevenDays.swift; sourceTree = "<group>"; };
 		65AA36B824A5DE0300B69C88 /* calorie_widget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calorie_widget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65AA36BB24A5DE0300B69C88 /* calorie_widgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calorie_widgetApp.swift; sourceTree = "<group>"; };
 		65AA36BD24A5DE0300B69C88 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -219,6 +222,7 @@
 				65B73B3424B1EFF3006A8FFF /* MyHealthStore.swift */,
 				65B73B3224B1EEB1006A8FFF /* CalorieManager.swift */,
 				652F2BD224B98C90002F673E /* GetValuesBySortedKeys.swift */,
+				652F2BD824B99719002F673E /* GetValuesByLastSevenDays.swift */,
 				652F2BD524B99070002F673E /* ScaleWeeklyCals.swift */,
 				65AA36F324A5DE4B00B69C88 /* Assets.xcassets */,
 				65AA36F524A5DE4B00B69C88 /* Info.plist */,
@@ -391,6 +395,7 @@
 			files = (
 				65AA36BE24A5DE0300B69C88 /* ContentView.swift in Sources */,
 				65B73B3824B1F506006A8FFF /* BurnedCalorieCount.swift in Sources */,
+				652F2BD924B99719002F673E /* GetValuesByLastSevenDays.swift in Sources */,
 				652F2BD424B98FA4002F673E /* GetValuesBySortedKeys.swift in Sources */,
 				65B73B3324B1EEB1006A8FFF /* CalorieManager.swift in Sources */,
 				65AA36BC24A5DE0300B69C88 /* calorie_widgetApp.swift in Sources */,
@@ -421,6 +426,7 @@
 			files = (
 				65AA36F224A5DE4800B69C88 /* calorie_widget_target.swift in Sources */,
 				65B73B3B24B1F785006A8FFF /* CalorieManager.swift in Sources */,
+				652F2BDA24B99719002F673E /* GetValuesByLastSevenDays.swift in Sources */,
 				652F2BD324B98C90002F673E /* GetValuesBySortedKeys.swift in Sources */,
 				65B73B3924B1F51B006A8FFF /* BurnedCalorieCount.swift in Sources */,
 				65B73B3A24B1F782006A8FFF /* MyHealthStore.swift in Sources */,

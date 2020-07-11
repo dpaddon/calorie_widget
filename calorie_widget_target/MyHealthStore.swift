@@ -92,11 +92,13 @@ class MyHealthStore: HKHealthStore {
             statsCollection.enumerateStatistics(from: startDate, to: endDate as Date) { [unowned self] statistics, stop in
                 
                 if let quantity = statistics.sumQuantity() {
-                    let date = statistics.startDate
+//                    let date = statistics.startDate
+                    let dateComponents = calendar.dateComponents([.day , .month , .year, .weekday], from: statistics.startDate)
+                    let date = calendar.date(from: dateComponents)
                     let value = quantity.doubleValue(for: HKUnit.kilocalorie())
                     
                     // Save the value in our output dict
-                    weeklyCalOutput[date]=Int(value)
+                    weeklyCalOutput[date!]=Int(value)
                 }
             }
             
